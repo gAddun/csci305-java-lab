@@ -1,4 +1,5 @@
-public class Element{
+package csci305.javalab;
+public abstract class Element{
 	private String name;
 
 	public Element(String name){
@@ -8,8 +9,6 @@ public class Element{
 	public String getName(){
 		return this.name;
 	}
-	
-	public abstract compareTo(Element e){
-		
-	}
+
+	public abstract String compareTo(Element e);
 }
