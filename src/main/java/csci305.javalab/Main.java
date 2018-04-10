@@ -5,7 +5,10 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Main{
+    //laast_playes acessed by LastPlayBot()
     private static int last_played = 1;
+    //has_humans accessed by VkBot()
+    private static boolean has_humans = false;
     private static final Map<Integer, Element> moves = new HashMap<Integer, Element>();
 
     public static void main(String args[]){
@@ -15,8 +18,6 @@ public class Main{
         Player p2 = null;
         int p1_score = 0;
         int p2_score = 0;
-
-
 
         //Initialize Hashmap
         Rock rock = new Rock("Rock");
@@ -45,6 +46,8 @@ public class Main{
                 "(4) IterativeBot\n" +
                 "(5) LastPlayBot\n" +
                 "(6) MyBot");
+
+        //Loop for input of player 1
         while(!accepted){
             System.out.println("Choose player 1: ");
             player1 = input_reader.nextInt();
@@ -54,6 +57,8 @@ public class Main{
                 System.out.println("Invalid selection");
         }
         accepted = false;
+
+        //Loop for input of player 2
         while(!accepted){
             System.out.println("Choose player 2: ");
             player2 = input_reader.nextInt();
@@ -63,6 +68,8 @@ public class Main{
                 System.out.println("Invalid selection");
         }
         int i = 0;
+
+        //Loop to create each player based on user selection
         while (i<2){
             int choice;
             Player temp;
@@ -72,6 +79,7 @@ public class Main{
                 choice = player2;
             switch(choice){
                 case 1: temp = new Human("Human");
+                        has_humans = true;
                     break;
                 case 2: temp = new StupidBot("StupidBot");
                     break;
@@ -81,7 +89,7 @@ public class Main{
                     break;
                 case 5: temp = new LastPlayBot("LastPlayBot");
                     break;
-                case 6: temp = new MyBot("MyBot");
+                case 6: temp = new MyBot("Voigt-Kampff Bot");
                     break;
                 default:temp = new Human("Human");
             }
@@ -91,7 +99,6 @@ public class Main{
                 p2 = temp;
             i++;
         }
-
         System.out.println(String.format("\n%s vs %s \n", p1.getName(), p2.getName()));
 
         //Check if player 1 is LastPlayBot
@@ -127,6 +134,8 @@ public class Main{
             //Print results
             System.out.println(results + "\n\n");
         }
+
+
         //Print and tally final results
         System.out.println(String.format("The score is %d to %d", p1_score, p2_score));
         String results;
@@ -140,8 +149,13 @@ public class Main{
 
     }
 
-    //Method to pass last played moe to LastPlayBot
+    //Method to pass last played move to LastPlayBot
     public static int getLastPlay(){
         return last_played;
+    }
+
+    // Method used by VKBot to determine if the game has humans
+    public static boolean is_humans(){
+        return has_humans;
     }
 }
