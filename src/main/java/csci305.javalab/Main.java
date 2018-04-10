@@ -45,13 +45,13 @@ public class Main{
                 "(3) RandomBot\n" +
                 "(4) IterativeBot\n" +
                 "(5) LastPlayBot\n" +
-                "(6) MyBot");
+                "(6) Voigt-Kampff Bot");
 
         //Loop for input of player 1
         while(!accepted){
             System.out.println("Choose player 1: ");
             player1 = input_reader.nextInt();
-            if(player1>0 && player1<6)
+            if(player1>0 && player1<7)
                 accepted = true;
             else
                 System.out.println("Invalid selection");
@@ -62,7 +62,7 @@ public class Main{
         while(!accepted){
             System.out.println("Choose player 2: ");
             player2 = input_reader.nextInt();
-            if(player2>0 && player2<6)
+            if(player2>0 && player2<7)
                 accepted = true;
             else
                 System.out.println("Invalid selection");
@@ -89,9 +89,11 @@ public class Main{
                     break;
                 case 5: temp = new LastPlayBot("LastPlayBot");
                     break;
-                case 6: temp = new MyBot("Voigt-Kampff Bot");
+                case 6: temp = new VKBot("Voigt-Kampff Bot");
                     break;
                 default:temp = new Human("Human");
+                        has_humans = true;
+                    break;
             }
             if(i==0)
                 p1 = temp;

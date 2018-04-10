@@ -3,6 +3,7 @@ package csci305.javalab;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Random;
 
 /*
     My Bot is kind of a satire. In "Do Androids Dream Of Electric Sheep?" (A.K.A. the book from which Bladerunner was adapted)
@@ -15,20 +16,21 @@ import java.util.HashMap;
 */
 public class VKBot extends Player{
     //Structure to store the lengthy user prompts
-    private final Map<Integer, String> questions = new HashMap<Integer, String>;
+    private final Map<Integer, String> questions = new HashMap<Integer, String>();
     public VKBot(String name){
         super(name);
+        this.init_map();
 
     }
     @Override
     public int play() {
         int question_num = 1 + (new Random().nextInt(8));
-        int move = null;
+        int move = 0;
         if(Main.is_humans()) {
             System.out.println(questions.get(question_num));
             Scanner input_reader = new Scanner(System.in);
             boolean accepted = false;
-            int response  = null;
+            int response  = 0;
             while (!accepted) {
                 response = input_reader.nextInt();
                 if (response > 0 && response < 4)
@@ -36,39 +38,45 @@ public class VKBot extends Player{
                 else
                     System.out.println("Invalid choice");
             }
-            move = gen_qNa(question_num, response );
+            move = gen_qNa(question_num, response);
 
         }
         else{
-            move = int question_num = 1 + (new Random().nextInt(5));
+            move = 1 + (new Random().nextInt(5));
             }
         return move;
-        }
-
     }
+
+
     //depending on the question asked and response received, generate a move from one of five
     //random move generators
     private int gen_qNa(int question, int response){
         int semi_random_a = (question +(question*response))%5 + 1;
-        int semi_random_b = 1 + (new Random().nextInt(3));
-        int[] choices;
+        int semi_random_b =  new Random().nextInt(3);
+        int choices[][] = {{1,3,5},{2, 4, 1},{3, 5, 2},{4, 1,3},{5, 2, 4} };
+        int choice = 0;
         switch(semi_random_a){
-            case 1 : choices = {1,3,5}
+            case 1 :
+                    choice = choices[0][semi_random_b];
                     break;
-            case 2 : choices = {2, 4, 1};
+            case 2 :
+                    choice = choices[1][semi_random_b];
                     break;
-            case 3:  choices = {3, 5, 2};
+            case 3:
+                    choice = choices[2][semi_random_b];
                     break;
-            case 4:  choices = {4, 1,3};
-                break;
-            case 5:  choices = {5, 2, 4};
-                break;
-        return choices[semi_random_b]
+            case 4:
+                    choice = choices[3][semi_random_b];
+                    break;
+            case 5:
+                    choice = choices[4][semi_random_b];
+                    break;
         }
+        return choice;
 
     }
 
-    private void init_maps(){
+    private void init_map(){
         questions.put(1, "It’s your birthday. Someone gives you a calfskin wallet. What do you do:" +
                 "\n1.) \"What kind of question is that?" +
                 "\n2.) \"Calfskin is illegal. I bring the wallet to the police" +
