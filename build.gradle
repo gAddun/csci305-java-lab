@@ -39,4 +39,4 @@ run {
 }
 
 // Define the main class for the application
-mainClassName = 'csci305.javalab.TestElements'
+mainClassName = 'csci305.javalab.Main'

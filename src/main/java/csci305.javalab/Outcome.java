@@ -10,7 +10,7 @@ public class Outcome{
 			"Scissors decapitate Lizard", "Lizard eats Paper", "Paper disproves Spock",
 			"Spock vaporizes Rock", "Rock crushes Scissors" };
 	//Holds contents of string2
-	private final String[] outcomes = {"Player 1 wins", "Player 1 loses"};
+	private final String[] outcomes = {"Player 1 wins", "Player 2 wins"};
 
 	//Constructor for Outcome object
 	public Outcome(String e1, String e2){
